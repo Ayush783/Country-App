@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(32)),
-                        child: TextFormField(
+                        child: TextField(
                           controller: controller,
                           decoration: kInputDecoration(size),
                         ),

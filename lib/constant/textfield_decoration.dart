@@ -11,6 +11,14 @@ InputDecoration? kInputDecoration(Size size) => InputDecoration(
         borderRadius: BorderRadius.circular(32),
         borderSide: BorderSide(color: Color(0xff6C63FF), width: 2),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(32),
+        borderSide: BorderSide(color: Colors.red, width: 1),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(32),
+        borderSide: BorderSide(color: Colors.red, width: 2),
+      ),
       suffixIcon: Padding(
         padding: const EdgeInsets.only(right: 24.0),
         child: SvgPicture.asset(
