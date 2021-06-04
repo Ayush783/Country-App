@@ -37,7 +37,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
-      return left(SearchFailure(e.error()));
+      return left(SearchFailure('Something went wrong'));
     }
   }
 
@@ -52,13 +52,16 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
-      return left(SearchFailure(e.error()));
+      return left(SearchFailure('Something went wrong'));
     }
   }
 
   //get country by language
   Future<Either<SearchFailure, List<Country>>> getCountriesByLanguage(
       {@required String lang}) async {
+    print(
+      searchByLanguageUrl + '$lang',
+    );
     try {
       final response = await _dio.get(
         searchByLanguageUrl + '$lang',
@@ -67,7 +70,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
-      return left(SearchFailure(e.error()));
+      return left(SearchFailure('Something went wrong'));
     }
   }
 
@@ -82,7 +85,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
-      return left(SearchFailure(e.error()));
+      return left(SearchFailure('Something went wrong'));
     }
   }
 
@@ -97,7 +100,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
-      return left(SearchFailure(e.error()));
+      return left(SearchFailure('Something went wrong'));
     }
   }
 }

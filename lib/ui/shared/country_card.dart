@@ -1,5 +1,6 @@
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
+import 'package:country/ui/country_detail/country_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -37,6 +38,13 @@ class CountryCard extends StatelessWidget {
           onPressed: () {},
           icon: Icon(Icons.bookmark),
         ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => CountryDetailScreen(country: country),
+            ),
+          );
+        },
         minVerticalPadding: 16,
       ),
     );
