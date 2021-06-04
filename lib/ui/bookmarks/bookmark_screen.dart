@@ -32,7 +32,7 @@ class BookmarkScreen extends ConsumerWidget {
               Padding(padding: EdgeInsets.only(top: size.height * 0.05)),
               if (bookmarks.value.isEmpty)
                 Container(
-                  height: size.height,
+                  height: size.height * 0.5,
                   width: size.width,
                   child: Center(
                     child: Text('No bookmarks added'),

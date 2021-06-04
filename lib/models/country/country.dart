@@ -10,39 +10,31 @@ class Country {
       numericCode,
       flag;
   final int? population;
-  final List? callingCodes,
-      timezones,
-      borders,
-      latlng,
-      currencies,
-      languages,
-      regionalBlocs;
+  final List? callingCodes, timezones, borders, latlng, currencies, languages;
   final Map? translations;
-  final bool error;
   final double? area;
 
   Country(
-      this.name,
-      this.alpha2Code,
-      this.alpha3Code,
-      this.capital,
-      this.region,
-      this.subregion,
-      this.population,
-      this.demonym,
-      this.nativeName,
-      this.numericCode,
-      this.flag,
-      this.area,
-      this.callingCodes,
-      this.timezones,
-      this.borders,
-      this.latlng,
-      this.currencies,
-      this.languages,
-      this.regionalBlocs,
-      this.translations,
-      this.error);
+    this.name,
+    this.alpha2Code,
+    this.alpha3Code,
+    this.capital,
+    this.region,
+    this.subregion,
+    this.population,
+    this.demonym,
+    this.nativeName,
+    this.numericCode,
+    this.flag,
+    this.area,
+    this.callingCodes,
+    this.timezones,
+    this.borders,
+    this.latlng,
+    this.currencies,
+    this.languages,
+    this.translations,
+  );
 
   Country.fromJson(Map<String, dynamic> json)
       : name = json['name'],
@@ -63,30 +55,30 @@ class Country {
         latlng = json['latlng'],
         currencies = json['currencies'],
         languages = json['languages'],
-        regionalBlocs = json['regionalBlocs'],
-        translations = json['translations'],
-        error = false;
+        translations = json['translations'];
 
-  Country.error()
-      : name = '',
-        alpha2Code = '',
-        alpha3Code = '',
-        capital = '',
-        region = '',
-        subregion = '',
-        population = 0,
-        demonym = '',
-        nativeName = '',
-        numericCode = '',
-        flag = '',
-        area = 0.0,
-        callingCodes = [],
-        timezones = [],
-        borders = [],
-        latlng = [],
-        currencies = [],
-        languages = [],
-        regionalBlocs = [],
-        translations = {},
-        error = true;
+  Map<String, dynamic> toJson(Country c) {
+    Map<String, dynamic> json = {
+      'name': c.name,
+      'alpha2Code': c.alpha2Code,
+      'alpha3Code': c.alpha3Code,
+      'capital': c.capital,
+      'region': c.region,
+      'subregion': c.subregion,
+      'population': c.population,
+      'demonym': c.demonym,
+      'nativeName': c.nativeName,
+      'numericCode': c.numericCode,
+      'flag': c.flag,
+      'area': c.area,
+      'callingCodes': c.callingCodes,
+      'timezones': c.timezones,
+      'borders': c.borders,
+      'latlng': c.latlng,
+      'currencies': c.currencies,
+      'languages': c.languages,
+      'translations': c.translations,
+    };
+    return json;
+  }
 }

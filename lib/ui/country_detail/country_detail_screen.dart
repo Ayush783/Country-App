@@ -1,6 +1,7 @@
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/providers/bookmark_provider.dart';
+import 'package:country/repository/save/shared_pref_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CountryDetailScreen extends ConsumerWidget {
   final Country? country;
   const CountryDetailScreen({Key? key, this.country}) : super(key: key);
+
+  static SharedPrefService spService = SharedPrefService();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -55,11 +58,13 @@ class CountryDetailScreen extends ConsumerWidget {
                     IconButton(
                       onPressed: () {
                         context.read(bookMarkProvider).toggleBookmark(country!);
+                        spService.saveBookmarks(bookmarks.value);
                       },
                       icon: Icon(
                         Icons.bookmark,
                       ),
-                      color: bookmarks.value.contains(country)
+                      color: bookmarks.value
+                              .any((element) => element.name == country!.name)
                           ? Color(0xff6C63FF)
                           : Colors.grey,
                     ),

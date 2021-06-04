@@ -9,10 +9,15 @@ class BookMarkNotifier extends ChangeNotifier {
   List<Country> get value => _value;
 
   void toggleBookmark(Country country) {
-    if (_value.contains(country))
+    if (_value.any((element) => element.name == country.name))
       _value.remove(country);
     else
       _value.add(country);
+    notifyListeners();
+  }
+
+  void getBookmarksfromDevice(List<Country> value) {
+    _value = value;
     notifyListeners();
   }
 }
