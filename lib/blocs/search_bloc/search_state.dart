@@ -1,3 +1,4 @@
+//@dart=2.9
 part of 'search_bloc.dart';
 
 @immutable

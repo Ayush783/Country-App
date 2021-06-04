@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -21,68 +22,74 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (event is SearchCountry) {
       yield Searching();
       List<Country> countries = List.empty(growable: true);
+      print(1);
       //by name
       final countriesByNameOrFailure =
           await _searchService.getCountriesByName(name: event.query);
-      if (countriesByNameOrFailure!.isLeft())
+      if (countriesByNameOrFailure.isLeft())
         yield countriesByNameOrFailure.fold(
             (l) => SearchFailed(l), (r) => null);
       countries.addAll(
         countriesByNameOrFailure.getOrElse(() => null),
       );
+      print(2);
       //by code
       final countriesByCodeOrFailure =
           await _searchService.getCountriesByCode(code: event.query);
-      if (countriesByCodeOrFailure!.isLeft())
+      if (countriesByCodeOrFailure.isLeft())
         yield countriesByCodeOrFailure.fold(
             (l) => SearchFailed(l), (r) => null);
       countriesByCodeOrFailure.fold((l) => null, (r) {
         for (Country c in r) {
-          if (!countries.contains(c)) countries.add(c);
+          if (countries.contains(c)) countries.add(c);
         }
       });
+      print(3);
       //by currency
       final countriesByCurrencyOrFailure =
           await _searchService.getCountriesByCurrency(currency: event.query);
-      if (countriesByCurrencyOrFailure!.isLeft())
+      if (countriesByCurrencyOrFailure.isLeft())
         yield countriesByCurrencyOrFailure.fold(
             (l) => SearchFailed(l), (r) => null);
       countriesByCurrencyOrFailure.fold((l) => null, (r) {
         for (Country c in r) {
-          if (!countries.contains(c)) countries.add(c);
+          if (countries.contains(c)) countries.add(c);
         }
       });
+      print(4);
       //by Language
       final countriesByLanguageOrFailure =
           await _searchService.getCountriesByLanguage(lang: event.query);
-      if (countriesByLanguageOrFailure!.isLeft())
+      if (countriesByLanguageOrFailure.isLeft())
         yield countriesByLanguageOrFailure.fold(
             (l) => SearchFailed(l), (r) => null);
       countriesByLanguageOrFailure.fold((l) => null, (r) {
         for (Country c in r) {
-          if (!countries.contains(c)) countries.add(c);
+          if (countries.contains(c)) countries.add(c);
         }
       });
+      print(5);
       //by region
       final countriesByRegionOrFailure =
           await _searchService.getCountriesByRegion(region: event.query);
-      if (countriesByRegionOrFailure!.isLeft())
+      if (countriesByRegionOrFailure.isLeft())
         yield countriesByRegionOrFailure.fold(
             (l) => SearchFailed(l), (r) => null);
       countriesByRegionOrFailure.fold((l) => null, (r) {
         for (Country c in r) {
-          if (!countries.contains(c)) countries.add(c);
+          if (countries.contains(c)) countries.add(c);
         }
       });
+      print(6);
       //by capital
       final countriesByCapitalOrFailure =
           await _searchService.getCountriesByCapital(capital: event.query);
-      if (countriesByCapitalOrFailure!.isLeft())
+      if (countriesByCapitalOrFailure.isLeft())
         yield countriesByCapitalOrFailure.fold(
             (l) => SearchFailed(l), (r) => null);
       countriesByCapitalOrFailure.fold((l) => null, (r) {
         for (Country c in r) {
-          if (!countries.contains(c)) countries.add(c);
+          if (countries.contains(c)) countries.add(c);
         }
       });
     }

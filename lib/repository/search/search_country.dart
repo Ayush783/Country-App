@@ -1,8 +1,10 @@
+//@dart=2.9
 import 'dart:convert';
 
 import 'package:country/constant/api_urls.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/models/failures/search_failure.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,24 +12,28 @@ import 'package:flutter/cupertino.dart';
 class SearchService {
   final _dio = Dio();
   //get countries by name
-  Future<Either<SearchFailure, List<Country>>>? getCountriesByName(
-      {@required String? name}) async {
+  Future<Either<SearchFailure, List<Country>>> getCountriesByName(
+      {@required String name}) async {
+    print(name);
+    print('\n');
+    print(searchByNameUrl + '$name');
     try {
       final response = await _dio.get(
         searchByNameUrl + '$name',
       );
+      print(response.statusCode);
       final List<Map<String, dynamic>> data =
           List.from(jsonDecode(response.data));
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
-    } catch (e) {
-      return left(SearchFailure(e.toString()));
+    } on DioError catch (e) {
+      return left(SearchFailure(e.error()));
     }
   }
 
   //get countries by code
-  Future<Either<SearchFailure, List<Country>>>? getCountriesByCode(
-      {@required String? code}) async {
+  Future<Either<SearchFailure, List<Country>>> getCountriesByCode(
+      {@required String code}) async {
     try {
       final response = await _dio.get(
         searchByCodeUrl + '$code',
@@ -36,14 +42,14 @@ class SearchService {
           List.from(jsonDecode(response.data));
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
-    } catch (e) {
-      return left(SearchFailure(e.toString()));
+    } on DioError catch (e) {
+      return left(SearchFailure(e.error()));
     }
   }
 
   //get countries by currency
-  Future<Either<SearchFailure, List<Country>>>? getCountriesByCurrency(
-      {@required String? currency}) async {
+  Future<Either<SearchFailure, List<Country>>> getCountriesByCurrency(
+      {@required String currency}) async {
     try {
       final response = await _dio.get(
         searchByCurrencyUrl + '$currency',
@@ -52,14 +58,14 @@ class SearchService {
           List.from(jsonDecode(response.data));
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
-    } catch (e) {
-      return left(SearchFailure(e.toString()));
+    } on DioError catch (e) {
+      return left(SearchFailure(e.error()));
     }
   }
 
   //get country by language
-  Future<Either<SearchFailure, List<Country>>>? getCountriesByLanguage(
-      {@required String? lang}) async {
+  Future<Either<SearchFailure, List<Country>>> getCountriesByLanguage(
+      {@required String lang}) async {
     try {
       final response = await _dio.get(
         searchByLanguageUrl + '$lang',
@@ -68,14 +74,14 @@ class SearchService {
           List.from(jsonDecode(response.data));
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
-    } catch (e) {
-      return left(SearchFailure(e.toString()));
+    } on DioError catch (e) {
+      return left(SearchFailure(e.error()));
     }
   }
 
   //get country by region
-  Future<Either<SearchFailure, List<Country>>>? getCountriesByRegion(
-      {@required String? region}) async {
+  Future<Either<SearchFailure, List<Country>>> getCountriesByRegion(
+      {@required String region}) async {
     try {
       final response = await _dio.get(
         searchByRegionUrl + '$region',
@@ -84,14 +90,14 @@ class SearchService {
           List.from(jsonDecode(response.data));
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
-    } catch (e) {
-      return left(SearchFailure(e.toString()));
+    } on DioError catch (e) {
+      return left(SearchFailure(e.error()));
     }
   }
 
   //get country by capital
-  Future<Either<SearchFailure, List<Country>>>? getCountriesByCapital(
-      {@required String? capital}) async {
+  Future<Either<SearchFailure, List<Country>>> getCountriesByCapital(
+      {@required String capital}) async {
     try {
       final response = await _dio.get(
         searchByCapitalUrl + '$capital',
@@ -100,8 +106,8 @@ class SearchService {
           List.from(jsonDecode(response.data));
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
-    } catch (e) {
-      return left(SearchFailure(e.toString()));
+    } on DioError catch (e) {
+      return left(SearchFailure(e.error()));
     }
   }
 }
