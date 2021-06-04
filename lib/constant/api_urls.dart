@@ -4,7 +4,7 @@ const String searchByNameUrl = apiBaseUrl + 'name/';
 
 const String searchByCodeUrl = apiBaseUrl + 'code/alpha';
 
-const String searchByCurencyUrl = apiBaseUrl + 'currency/';
+const String searchByCurrencyUrl = apiBaseUrl + 'currency/';
 
 const String searchByLanguageUrl = apiBaseUrl + 'lang/';
 
