@@ -21,4 +21,7 @@ InputDecoration? kInputDecoration(Size size) => InputDecoration(
       hintStyle: kBodyTextStyle,
       suffixIconConstraints: BoxConstraints.loose(size),
       hintText: 'Enter country name or code',
+      prefix: Container(
+        width: 12,
+      ),
     );

@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  static TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -22,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                   'Get country details from all over the globe',
                   style: kheadingTextStyle,
                 ),
-                Padding(padding: EdgeInsets.only(top: size.height * 0.05)),
+                Padding(padding: EdgeInsets.only(top: size.height * 0.08)),
                 SvgPicture.asset(
                   'assets/images/image1.svg',
                   width: size.width * 0.5,
@@ -40,10 +42,11 @@ class HomeScreen extends StatelessWidget {
                       ],
                       borderRadius: BorderRadius.circular(32)),
                   child: TextField(
+                    controller: controller,
                     decoration: kInputDecoration(size),
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(top: size.height * 0.24)),
+                Padding(padding: EdgeInsets.only(top: size.height * 0.1)),
                 ElevatedButton(
                   onPressed: () {},
                   child: Text(

@@ -8,5 +8,5 @@ const TextStyle? kheadingTextStyle = TextStyle(
 
 const TextStyle? kBodyTextStyle = TextStyle(
   fontFamily: 'mate',
-  fontSize: 16,
+  fontSize: 18,
 );
