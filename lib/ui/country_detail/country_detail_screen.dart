@@ -1,14 +1,17 @@
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
+import 'package:country/providers/bookmark_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CountryDetailScreen extends StatelessWidget {
+class CountryDetailScreen extends ConsumerWidget {
   final Country? country;
   const CountryDetailScreen({Key? key, this.country}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final bookmarks = watch(bookMarkProvider);
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -50,10 +53,15 @@ class CountryDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read(bookMarkProvider).toggleBookmark(country!);
+                      },
                       icon: Icon(
                         Icons.bookmark,
                       ),
+                      color: bookmarks.value.contains(country)
+                          ? Color(0xff6C63FF)
+                          : Colors.grey,
                     ),
                     Padding(padding: EdgeInsets.only(right: 16)),
                     IconButton(
