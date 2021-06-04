@@ -21,77 +21,61 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   ) async* {
     if (event is SearchCountry) {
       yield Searching();
-      List<Country> countries = List.empty(growable: true);
-      print(1);
-      //by name
-      final countriesByNameOrFailure =
-          await _searchService.getCountriesByName(name: event.query);
-      if (countriesByNameOrFailure.isLeft())
-        yield countriesByNameOrFailure.fold(
-            (l) => SearchFailed(l), (r) => null);
-      countries.addAll(
-        countriesByNameOrFailure.getOrElse(() => null),
-      );
-      print(2);
-      //by code
-      final countriesByCodeOrFailure =
-          await _searchService.getCountriesByCode(code: event.query);
-      if (countriesByCodeOrFailure.isLeft())
-        yield countriesByCodeOrFailure.fold(
-            (l) => SearchFailed(l), (r) => null);
-      countriesByCodeOrFailure.fold((l) => null, (r) {
-        for (Country c in r) {
-          if (countries.contains(c)) countries.add(c);
-        }
-      });
-      print(3);
-      //by currency
-      final countriesByCurrencyOrFailure =
-          await _searchService.getCountriesByCurrency(currency: event.query);
-      if (countriesByCurrencyOrFailure.isLeft())
-        yield countriesByCurrencyOrFailure.fold(
-            (l) => SearchFailed(l), (r) => null);
-      countriesByCurrencyOrFailure.fold((l) => null, (r) {
-        for (Country c in r) {
-          if (countries.contains(c)) countries.add(c);
-        }
-      });
-      print(4);
-      //by Language
-      final countriesByLanguageOrFailure =
-          await _searchService.getCountriesByLanguage(lang: event.query);
-      if (countriesByLanguageOrFailure.isLeft())
-        yield countriesByLanguageOrFailure.fold(
-            (l) => SearchFailed(l), (r) => null);
-      countriesByLanguageOrFailure.fold((l) => null, (r) {
-        for (Country c in r) {
-          if (countries.contains(c)) countries.add(c);
-        }
-      });
-      print(5);
-      //by region
-      final countriesByRegionOrFailure =
-          await _searchService.getCountriesByRegion(region: event.query);
-      if (countriesByRegionOrFailure.isLeft())
-        yield countriesByRegionOrFailure.fold(
-            (l) => SearchFailed(l), (r) => null);
-      countriesByRegionOrFailure.fold((l) => null, (r) {
-        for (Country c in r) {
-          if (countries.contains(c)) countries.add(c);
-        }
-      });
-      print(6);
-      //by capital
-      final countriesByCapitalOrFailure =
-          await _searchService.getCountriesByCapital(capital: event.query);
-      if (countriesByCapitalOrFailure.isLeft())
-        yield countriesByCapitalOrFailure.fold(
-            (l) => SearchFailed(l), (r) => null);
-      countriesByCapitalOrFailure.fold((l) => null, (r) {
-        for (Country c in r) {
-          if (countries.contains(c)) countries.add(c);
-        }
-      });
+
+      switch (event.searchBy) {
+        case 'Name':
+          final countriesByNameOrFailure =
+              await _searchService.getCountriesByName(name: event.query);
+          yield countriesByNameOrFailure.fold(
+            (l) => SearchFailed(l),
+            (r) => SearchSuccess(r),
+          );
+          break;
+        case 'Code':
+          final countriesByCodeOrFailure =
+              await _searchService.getCountriesByCode(code: event.query);
+          yield countriesByCodeOrFailure.fold(
+            (l) => SearchFailed(l),
+            (r) => SearchSuccess(r),
+          );
+          break;
+        case 'Region':
+          final countriesByRegionOrFailure =
+              await _searchService.getCountriesByRegion(region: event.query);
+          yield countriesByRegionOrFailure.fold(
+            (l) => SearchFailed(l),
+            (r) => SearchSuccess(r),
+          );
+          break;
+        case 'Language':
+          final countriesByLanguageOrFailure =
+              await _searchService.getCountriesByLanguage(lang: event.query);
+          yield countriesByLanguageOrFailure.fold(
+            (l) => SearchFailed(l),
+            (r) => SearchSuccess(r),
+          );
+          break;
+        case 'Capital':
+          final countriesByCapitalOrFailure =
+              await _searchService.getCountriesByCapital(capital: event.query);
+          yield countriesByCapitalOrFailure.fold(
+            (l) => SearchFailed(l),
+            (r) => SearchSuccess(r),
+          );
+          break;
+        case 'Currency':
+          final countriesByCurrencyOrFailure = await _searchService
+              .getCountriesByCurrency(currency: event.query);
+          yield countriesByCurrencyOrFailure.fold(
+            (l) => SearchFailed(l),
+            (r) => SearchSuccess(r),
+          );
+          break;
+        default:
+          yield SearchFailed(
+            SearchFailure('Something went wrong!'),
+          );
+      }
     }
   }
 }

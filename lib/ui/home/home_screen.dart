@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController controller = TextEditingController();
+  String _searchBy;
 
   @override
   Widget build(BuildContext context) {
@@ -44,32 +45,85 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: size.width * 0.5,
                       ),
                       Padding(padding: EdgeInsets.only(top: size.height * 0.1)),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(2, 2),
-                                color: Colors.grey,
-                                blurRadius: 2,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: DropdownButton(
+                                items: searchBy
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        child: Text(e),
+                                        value: e,
+                                      ),
+                                    )
+                                    .toList(),
+                                hint: Text('Search By'),
+                                onChanged: (value) {
+                                  _searchBy = value;
+                                  setState(() {});
+                                },
+                                value: _searchBy,
+                                iconEnabledColor: Color(0xff6C63FF),
+                                underline: Container(),
                               ),
-                            ],
-                            borderRadius: BorderRadius.circular(32)),
-                        child: TextField(
-                          controller: controller,
-                          decoration: kInputDecoration(size),
-                        ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              width: size.width * 0.75,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(2, 2),
+                                      color: Colors.grey,
+                                      blurRadius: 2,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(32)),
+                              child: TextField(
+                                controller: controller,
+                                decoration: kInputDecoration(size),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Padding(padding: EdgeInsets.only(top: size.height * 0.1)),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SearchResultProvider(
-                                query: controller.text,
+                          if (controller.text.isNotEmpty &&
+                              _searchBy.isNotEmpty)
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SearchResultProvider(
+                                  query: controller.text,
+                                  searchBy: _searchBy,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          else
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) => Container(
+                                height: 48,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 16),
+                                color: Colors.red,
+                                child: Text(
+                                  'Invalid Input',
+                                  style: kBodyTextStyle.copyWith(
+                                      color: Colors.white),
+                                ),
+                              ),
+                              elevation: 4,
+                              isDismissible: true,
+                            );
                         },
                         child: Text(
                           'Search',
@@ -100,3 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+List<String> searchBy = [
+  'Name',
+  'Code',
+  'Region',
+  'Capital',
+  'Language',
+  'Currency'
+];

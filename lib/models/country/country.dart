@@ -5,17 +5,21 @@ class Country {
       capital,
       region,
       subregion,
-      population,
       demonym,
       nativeName,
       numericCode,
       flag;
-  final int? area;
-  final List<String>? callingCodes, timezones, borders;
-  final List<double>? latlng;
-  final List<Map>? currencies, languages, regionalBlocs;
+  final int? population;
+  final List? callingCodes,
+      timezones,
+      borders,
+      latlng,
+      currencies,
+      languages,
+      regionalBlocs;
   final Map? translations;
   final bool error;
+  final double? area;
 
   Country(
       this.name,
@@ -70,12 +74,12 @@ class Country {
         capital = '',
         region = '',
         subregion = '',
-        population = '',
+        population = 0,
         demonym = '',
         nativeName = '',
         numericCode = '',
         flag = '',
-        area = 0,
+        area = 0.0,
         callingCodes = [],
         timezones = [],
         borders = [],

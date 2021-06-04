@@ -22,8 +22,8 @@ class SearchService {
         searchByNameUrl + '$name',
       );
       print(response.statusCode);
-      final List<Map<String, dynamic>> data =
-          List.from(jsonDecode(response.data));
+      print(response.data);
+      final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {

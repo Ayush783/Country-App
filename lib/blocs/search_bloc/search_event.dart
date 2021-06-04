@@ -5,7 +5,7 @@ part of 'search_bloc.dart';
 abstract class SearchEvent {}
 
 class SearchCountry extends SearchEvent {
-  final String query;
+  final String query, searchBy;
 
-  SearchCountry(this.query);
+  SearchCountry(this.query, this.searchBy);
 }

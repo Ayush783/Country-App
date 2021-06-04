@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchResultProvider extends StatelessWidget {
-  final String query;
-  const SearchResultProvider({Key key, this.query}) : super(key: key);
+  final String query, searchBy;
+  const SearchResultProvider({Key key, this.query, this.searchBy})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SearchBloc>(
         create: (context) => SearchBloc()
           ..add(
-            SearchCountry(query),
+            SearchCountry(query, searchBy),
           ),
         child: BlocBuilder<SearchBloc, SearchState>(
           builder: (context, state) {
