@@ -1,6 +1,7 @@
 import 'package:country/country_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(CountryApp());
+  runApp(ProviderScope(child: CountryApp()));
 }

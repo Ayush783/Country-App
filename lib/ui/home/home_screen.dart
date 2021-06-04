@@ -1,13 +1,21 @@
 import 'package:country/constant/text_styles.dart';
 import 'package:country/constant/textfield_decoration.dart';
+import 'package:country/ui/home/providers/show_buttons.dart';
+import 'package:country/ui/home/widgets/home_screen_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static TextEditingController controller = TextEditingController();
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                             borderRadius: BorderRadius.circular(32)),
                         child: TextField(
-                          controller: controller,
+                          controller: HomeScreen.controller,
                           decoration: kInputDecoration(size),
                         ),
                       ),
@@ -65,39 +73,13 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             //buttons for saved and favourites
-            Positioned(
-              right: 12,
-              bottom: size.height * 0.1,
-              child: Column(
-                children: [
-                  //saved button
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Icon(Icons.bookmark),
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      fixedSize: Size(56, 56),
-                      padding: EdgeInsets.zero,
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 8)),
-                  //favourites button
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Icon(Icons.favorite),
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      fixedSize: Size(56, 56),
-                      padding: EdgeInsets.zero,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            HomeScreenButtons(size: size),
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read(showButtonsProvider).toggleShow();
+          },
           child: SvgPicture.asset(
             'assets/icons/menu.svg',
             height: 24,
