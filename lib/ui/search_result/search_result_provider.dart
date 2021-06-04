@@ -3,6 +3,7 @@ import 'package:country/blocs/search_bloc/search_bloc.dart';
 import 'package:country/ui/search_result/search_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class SearchResultProvider extends StatelessWidget {
   final String query, searchBy;
@@ -27,7 +28,15 @@ class SearchResultProvider extends StatelessWidget {
                   body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
+                  Expanded(
+                      child: Container(
+                    child: Center(
+                      child: Lottie.asset(
+                        'assets/animations/loading.json',
+                        height: 48,
+                      ),
+                    ),
+                  )),
                 ],
               ));
             else if (state is SearchFailed)

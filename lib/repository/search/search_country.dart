@@ -14,15 +14,10 @@ class SearchService {
   //get countries by name
   Future<Either<SearchFailure, List<Country>>> getCountriesByName(
       {@required String name}) async {
-    print(name);
-    print('\n');
-    print(searchByNameUrl + '$name');
     try {
       final response = await _dio.get(
         searchByNameUrl + '$name',
       );
-      print(response.statusCode);
-      print(response.data);
       final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
@@ -38,8 +33,7 @@ class SearchService {
       final response = await _dio.get(
         searchByCodeUrl + '$code',
       );
-      final List<Map<String, dynamic>> data =
-          List.from(jsonDecode(response.data));
+      final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
@@ -54,8 +48,7 @@ class SearchService {
       final response = await _dio.get(
         searchByCurrencyUrl + '$currency',
       );
-      final List<Map<String, dynamic>> data =
-          List.from(jsonDecode(response.data));
+      final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
@@ -70,8 +63,7 @@ class SearchService {
       final response = await _dio.get(
         searchByLanguageUrl + '$lang',
       );
-      final List<Map<String, dynamic>> data =
-          List.from(jsonDecode(response.data));
+      final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
@@ -86,8 +78,7 @@ class SearchService {
       final response = await _dio.get(
         searchByRegionUrl + '$region',
       );
-      final List<Map<String, dynamic>> data =
-          List.from(jsonDecode(response.data));
+      final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
@@ -102,8 +93,7 @@ class SearchService {
       final response = await _dio.get(
         searchByCapitalUrl + '$capital',
       );
-      final List<Map<String, dynamic>> data =
-          List.from(jsonDecode(response.data));
+      final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
