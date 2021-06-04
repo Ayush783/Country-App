@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
-class SearchCountry {
+class SearchService {
   final _dio = Dio();
   //get countries by name
   Future<Either<SearchFailure, List<Country>>>? getCountriesByName(
