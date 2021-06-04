@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ElevatedButton(
                         onPressed: () {
                           if (controller.text.isNotEmpty &&
-                              _searchBy.isNotEmpty)
+                              _searchBy.isNotEmpty) {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => SearchResultProvider(
@@ -107,7 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             );
-                          else
+                            // controller.text = '';
+                          } else
                             showModalBottomSheet(
                               context: context,
                               builder: (context) => Container(

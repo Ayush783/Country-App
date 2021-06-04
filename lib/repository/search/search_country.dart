@@ -22,7 +22,8 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
-      return left(SearchFailure(e.error()));
+      print(e);
+      return left(SearchFailure('Something went wrong'));
     }
   }
 
