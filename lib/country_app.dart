@@ -1,3 +1,4 @@
+import 'package:country/constant/theme.dart';
 import 'package:country/ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class CountryApp extends StatelessWidget {
       title: 'Country app',
       home: HomeScreen(),
       debugShowCheckedModeBanner: false,
+      theme: kAppTheme,
     );
   }
 }

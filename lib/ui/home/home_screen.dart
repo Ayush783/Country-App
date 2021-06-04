@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.only(top: size.height * 0.22)),
+              Padding(padding: EdgeInsets.only(top: size.height * 0.18)),
               SvgPicture.asset(
                 'assets/images/image1.svg',
                 width: size.width * 0.5,
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: kInputDecoration(size),
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: size.height * 0.1)),
+              Padding(padding: EdgeInsets.only(top: size.height * 0.24)),
               ElevatedButton(
                 onPressed: () {},
                 child: Text('Search'),

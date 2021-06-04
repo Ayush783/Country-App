@@ -25,6 +25,6 @@ flutter:
     - assets/images/
     - assets/icons/
   fonts:
-    - family: Schyler
+    - family: mate
       fonts:
         - asset: assets/fonts/MateSC-Regular.ttf
