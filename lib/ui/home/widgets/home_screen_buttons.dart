@@ -36,7 +36,7 @@ class HomeScreenButtons extends ConsumerWidget {
             //favourites button
             ElevatedButton(
               onPressed: () {},
-              child: Icon(Icons.favorite),
+              child: Icon(Icons.download),
               style: ElevatedButton.styleFrom(
                 shape: CircleBorder(),
                 fixedSize: Size(56, 56),
