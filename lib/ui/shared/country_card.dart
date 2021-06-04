@@ -1,10 +1,13 @@
 import 'package:country/constant/text_styles.dart';
+import 'package:country/models/country/country.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryCard extends StatelessWidget {
+  final Country? country;
   const CountryCard({
     Key? key,
+    this.country,
   }) : super(key: key);
 
   @override
@@ -14,7 +17,7 @@ class CountryCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16),
       child: ListTile(
         title: Text(
-          'United States of America',
+          country!.name!,
           style: kBodyTextStyle,
         ),
         dense: true,
@@ -22,12 +25,12 @@ class CountryCard extends StatelessWidget {
           width: 64,
           child: Center(
             child: SvgPicture.network(
-              'https://restcountries.eu/data/umi.svg',
+              country!.flag!,
               height: 24,
             ),
           ),
         ),
-        subtitle: Text('America'),
+        subtitle: Text(country!.region!),
         minLeadingWidth: 0,
         // isThreeLine: true,
         trailing: IconButton(

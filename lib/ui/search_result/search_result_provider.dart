@@ -22,6 +22,7 @@ class SearchResultProvider extends StatelessWidget {
             if (state is SearchSuccess)
               return SearchResultScreen(
                 query: query,
+                countries: state.countries,
               );
             else if (state is Searching)
               return Scaffold(
