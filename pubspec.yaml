@@ -28,3 +28,6 @@ flutter:
     - family: mate
       fonts:
         - asset: assets/fonts/MateSC-Regular.ttf
+    - family: roboto
+      fonts:
+        - asset: assets/fonts/RobotoSlab-Regular.ttf
