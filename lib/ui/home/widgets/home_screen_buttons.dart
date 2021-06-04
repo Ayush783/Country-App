@@ -1,4 +1,5 @@
 import 'package:country/providers/show_buttons.dart';
+import 'package:country/ui/bookmarks/bookmark_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +25,13 @@ class HomeScreenButtons extends ConsumerWidget {
           children: [
             //saved button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BookmarkScreen(),
+                  ),
+                );
+              },
               child: Icon(Icons.bookmark),
               style: ElevatedButton.styleFrom(
                 shape: CircleBorder(),
