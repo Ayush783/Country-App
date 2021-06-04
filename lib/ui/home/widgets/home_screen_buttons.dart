@@ -1,4 +1,4 @@
-import 'package:country/ui/home/providers/show_buttons.dart';
+import 'package:country/providers/show_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

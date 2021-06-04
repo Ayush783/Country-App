@@ -1,7 +1,7 @@
 //@dart=2.9
 import 'package:country/constant/text_styles.dart';
 import 'package:country/constant/textfield_decoration.dart';
-import 'package:country/ui/home/providers/show_buttons.dart';
+import 'package:country/providers/show_buttons.dart';
 import 'package:country/ui/home/widgets/home_screen_buttons.dart';
 import 'package:country/ui/search_result/search_result_provider.dart';
 import 'package:flutter/material.dart';

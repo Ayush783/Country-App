@@ -37,6 +37,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
+      print(e);
       return left(SearchFailure('Something went wrong'));
     }
   }
@@ -52,6 +53,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
+      print(e);
       return left(SearchFailure('Something went wrong'));
     }
   }
@@ -70,6 +72,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
+      print(e);
       return left(SearchFailure('Something went wrong'));
     }
   }
@@ -85,6 +88,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
+      print(e);
       return left(SearchFailure('Something went wrong'));
     }
   }
@@ -100,6 +104,7 @@ class SearchService {
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
+      print(e);
       return left(SearchFailure('Something went wrong'));
     }
   }
