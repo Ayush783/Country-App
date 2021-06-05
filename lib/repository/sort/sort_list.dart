@@ -31,4 +31,11 @@ class SortCountries {
     print(countries[0].area);
     context.read(searchResultListProvider).getList(countries);
   }
+
+  void sortByTimezone(List<Country> countries, BuildContext context) {
+    print(countries[0].timezones);
+    countries.sort((a, b) => a.timezones![0].compareTo(b.timezones![0] ?? 0));
+    print(countries[0].timezones);
+    context.read(searchResultListProvider).getList(countries);
+  }
 }

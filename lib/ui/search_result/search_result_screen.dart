@@ -109,6 +109,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                       sortCountries.sortByArea(
                                           widget.countries, context);
                                       break;
+                                    case 'Timezone':
+                                      sortCountries.sortByTimezone(
+                                          widget.countries, context);
+                                      break;
                                     default:
                                   }
                                   Navigator.pop(context);
@@ -131,4 +135,4 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   }
 }
 
-List<String> sortBy = ['Name', 'Code', 'Population', 'Area'];
+List<String> sortBy = ['Name', 'Code', 'Population', 'Area', 'Timezone'];
