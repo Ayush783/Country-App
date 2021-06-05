@@ -1,6 +1,7 @@
 //@dart=2.9
 
 import 'package:country/constant/api_urls.dart';
+import 'package:country/constant/langToCode.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/models/failures/search_failure.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -29,9 +30,6 @@ class SearchService {
   //get countries by code
   Future<Either<SearchFailure, List<Country>>> getCountriesByCode(
       {@required String code}) async {
-    print(
-      searchByCodeUrl + '$code',
-    );
     try {
       final response = await _dio.get(
         searchByCodeUrl + '$code',
@@ -64,12 +62,12 @@ class SearchService {
   //get country by language
   Future<Either<SearchFailure, List<Country>>> getCountriesByLanguage(
       {@required String lang}) async {
-    print(
-      searchByLanguageUrl + '$lang',
-    );
+    lang.toLowerCase();
+    final code = isoLangs.entries
+        .firstWhere((element) => element.value.toLowerCase() == lang);
     try {
       final response = await _dio.get(
-        searchByLanguageUrl + '$lang',
+        searchByLanguageUrl + '${code.key}',
       );
       final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
