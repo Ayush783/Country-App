@@ -98,14 +98,16 @@ class CountryDetailScreen extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            'Capital City -',
+                            'Capital City -  ',
                             style: kBodyTextStyle,
                           ),
                           Spacer(),
-                          Text(
-                            country.capital,
-                            style: kBodyTextStyle.copyWith(
-                                color: Colors.blue[900]),
+                          Expanded(
+                            child: Text(
+                              country.capital,
+                              style: kBodyTextStyle.copyWith(
+                                  color: Colors.blue[900]),
+                            ),
                           )
                         ],
                       ),
@@ -114,14 +116,18 @@ class CountryDetailScreen extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            'Population -',
+                            'Population -  ',
                             style: kBodyTextStyle,
                           ),
                           Spacer(),
-                          Text(
-                            country.population.toString(),
-                            style: kBodyTextStyle.copyWith(
-                                color: Colors.blue[900]),
+                          Wrap(
+                            children: [
+                              Text(
+                                country.population.toString(),
+                                style: kBodyTextStyle.copyWith(
+                                    color: Colors.blue[900]),
+                              ),
+                            ],
                           )
                         ],
                       ),
@@ -130,14 +136,16 @@ class CountryDetailScreen extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            'Area -',
+                            'Area -  ',
                             style: kBodyTextStyle,
                           ),
                           Spacer(),
-                          Text(
-                            country.area.toString() + ' km²',
-                            style: kBodyTextStyle.copyWith(
-                                color: Colors.blue[900]),
+                          Expanded(
+                            child: Text(
+                              country.area.toString() + ' km²',
+                              style: kBodyTextStyle.copyWith(
+                                  color: Colors.blue[900]),
+                            ),
                           )
                         ],
                       ),
@@ -146,14 +154,18 @@ class CountryDetailScreen extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            'Native name -',
+                            'Native name -  ',
                             style: kBodyTextStyle,
                           ),
                           Spacer(),
-                          Text(
-                            country.nativeName,
-                            style: kBodyTextStyle.copyWith(
-                                color: Colors.blue[900]),
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                country.nativeName,
+                                style: kBodyTextStyle.copyWith(
+                                    color: Colors.blue[900]),
+                              ),
+                            ),
                           )
                         ],
                       ),
