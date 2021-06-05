@@ -17,4 +17,9 @@ class DownloadsNotifier extends ChangeNotifier {
     _value.remove(name);
     notifyListeners();
   }
+
+  void getDownloads(List<String> value) {
+    _value.addAll(value);
+    notifyListeners();
+  }
 }

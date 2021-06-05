@@ -18,6 +18,7 @@ class _CountryAppState extends State<CountryApp> {
   void initState() {
     super.initState();
     spService.getBookmarks(context);
+    spService.getDownloads(context);
   }
 
   @override

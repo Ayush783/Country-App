@@ -1,29 +1,30 @@
 //@dart=2.9
 import 'package:country/blocs/download_bloc/download_bloc.dart';
 import 'package:country/models/country/country.dart';
+import 'package:country/providers/downloaded_files_provider.dart';
+import 'package:country/repository/save/shared_pref_service.dart';
 import 'package:country/ui/shared/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DownloadButton extends StatefulWidget {
+class DownloadButton extends ConsumerWidget {
   final Country country;
   const DownloadButton({Key key, this.country}) : super(key: key);
 
-  @override
-  _DownloadButtonState createState() => _DownloadButtonState();
-}
+  static SharedPrefService spService = SharedPrefService();
 
-class _DownloadButtonState extends State<DownloadButton> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final downloads = watch(downloadedFilesProvider);
     return BlocListener<DownloadBloc, DownloadState>(
       listener: (context, state) {
         if (state is DownloadSuccess) {
+          spService.saveDownloads(downloads.value);
           showModalBottomSheet(
             context: context,
             builder: (context) => Bottomsheet(
-                text: '${widget.country.name}.txt saved successfuly',
-                success: true),
+                text: '${country.name}.txt saved successfuly', success: true),
           );
         }
         if (state is DownloadFailed)
@@ -49,7 +50,7 @@ class _DownloadButtonState extends State<DownloadButton> {
             return IconButton(
                 onPressed: () {
                   BlocProvider.of<DownloadBloc>(context)
-                      .add(Download(widget.country, context));
+                      .add(Download(country, context));
                 },
                 icon: Icon(Icons.download));
           }
