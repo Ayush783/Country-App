@@ -2,7 +2,7 @@ const String apiBaseUrl = 'https://restcountries.eu/rest/v2/';
 
 const String searchByNameUrl = apiBaseUrl + 'name/';
 
-const String searchByCodeUrl = apiBaseUrl + 'code/alpha';
+const String searchByCodeUrl = apiBaseUrl + 'alpha/';
 
 const String searchByCurrencyUrl = apiBaseUrl + 'currency/';
 

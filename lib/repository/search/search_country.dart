@@ -29,11 +29,14 @@ class SearchService {
   //get countries by code
   Future<Either<SearchFailure, List<Country>>> getCountriesByCode(
       {@required String code}) async {
+    print(
+      searchByCodeUrl + '$code',
+    );
     try {
       final response = await _dio.get(
         searchByCodeUrl + '$code',
       );
-      final List<Map<String, dynamic>> data = List.from(response.data);
+      final List<Map<String, dynamic>> data = List.from([response.data]);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
     } on DioError catch (e) {
