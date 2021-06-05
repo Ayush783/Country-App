@@ -25,8 +25,7 @@ class SaveFileService {
         return left(DownloadFailure('File already exists'));
       } else {
         final file = await File('$tempPath/${country.name}.txt').create();
-        file.writeAsString(
-            'Country: ${country.name}\nCapital:${country.capital}\n');
+        file.writeAsString(str(country));
         context.read(downloadedFilesProvider).addFile(country.name);
       }
       return right(unit);
@@ -47,4 +46,8 @@ class SaveFileService {
     await file.delete();
     context.read(downloadedFilesProvider).delete(name);
   }
+}
+
+String str(Country c) {
+  return 'Country: ${c.name}\nCapital: ${c.capital}\nRegion: ${c.region}\nSub-region: ${c.subregion}\nLatitude: ${c.latlng[0]}\nLongitude: ${c.latlng[1]}\nPopulation: ${c.population}\nArea: ${c.area}\nNative name: ${c.nativeName}\nCountry codes: ${c.alpha2Code + '/' + c.alpha3Code}\nCalling codes: ${c.callingCodes.join('/')}\nBorder countries: ${c.borders.join('/')}\nTime-zones: ${c.timezones.join(' / ')}\nCurrencies: ${List.from(c.currencies.map((e) => e['symbol'] + ' ' + e['name'])).join(' / ')}';
 }
