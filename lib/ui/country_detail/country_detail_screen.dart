@@ -3,7 +3,7 @@ import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/providers/bookmark_provider.dart';
 import 'package:country/repository/save/shared_pref_service.dart';
-import 'package:country/ui/download/download_provider.dart';
+import 'package:country/ui/download/widgets/download_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';

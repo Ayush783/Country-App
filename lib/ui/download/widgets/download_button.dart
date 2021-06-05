@@ -1,7 +1,6 @@
 //@dart=2.9
 import 'package:country/blocs/download_bloc/download_bloc.dart';
 import 'package:country/models/country/country.dart';
-import 'package:country/providers/downloaded_files_provider.dart';
 import 'package:country/ui/shared/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
