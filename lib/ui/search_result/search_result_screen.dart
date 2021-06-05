@@ -24,7 +24,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   @override
   void initState() {
     super.initState();
-    context.read(searchResultListProvider).getList(widget.countries);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read(searchResultListProvider).getList(widget.countries);
+    });
   }
 
   @override
