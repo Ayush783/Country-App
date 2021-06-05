@@ -44,20 +44,21 @@ class SearchService {
   }
 
   //get countries by currency
-  Future<Either<SearchFailure, List<Country>>> getCountriesByCurrency(
-      {@required String currency}) async {
-    try {
-      final response = await _dio.get(
-        searchByCurrencyUrl + '$currency',
-      );
-      final List<Map<String, dynamic>> data = List.from(response.data);
-      final countries = data.map((e) => Country.fromJson(e)).toList();
-      return right(countries);
-    } on DioError catch (e) {
-      print(e);
-      return left(SearchFailure('Something went wrong'));
-    }
-  }
+  // Future<Either<SearchFailure, List<Country>>> getCountriesByCurrency(
+  //     {@required String currency}) async {
+  //   print(searchByCurrencyUrl + '$currency');
+  //   try {
+  //     final response = await _dio.get(
+  //       searchByCurrencyUrl + '$currency',
+  //     );
+  //     final List<Map<String, dynamic>> data = List.from(response.data);
+  //     final countries = data.map((e) => Country.fromJson(e)).toList();
+  //     return right(countries);
+  //   } on DioError catch (e) {
+  //     print(e);
+  //     return left(SearchFailure('Something went wrong'));
+  //   }
+  // }
 
   //get country by language
   Future<Either<SearchFailure, List<Country>>> getCountriesByLanguage(

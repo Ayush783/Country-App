@@ -156,5 +156,5 @@ List<String> searchBy = [
   'Region',
   'Capital',
   'Language',
-  'Currency'
+  // 'Currency'
 ];

@@ -63,14 +63,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             (r) => SearchSuccess(r),
           );
           break;
-        case 'Currency':
-          final countriesByCurrencyOrFailure = await _searchService
-              .getCountriesByCurrency(currency: event.query);
-          yield countriesByCurrencyOrFailure.fold(
-            (l) => SearchFailed(l),
-            (r) => SearchSuccess(r),
-          );
-          break;
+        // case 'Currency':
+        //   final countriesByCurrencyOrFailure = await _searchService
+        //       .getCountriesByCurrency(currency: event.query);
+        //   yield countriesByCurrencyOrFailure.fold(
+        //     (l) => SearchFailed(l),
+        //     (r) => SearchSuccess(r),
+        //   );
+        //   break;
         default:
           yield SearchFailed(
             SearchFailure('Something went wrong!'),
