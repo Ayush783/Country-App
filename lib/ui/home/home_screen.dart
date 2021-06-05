@@ -4,6 +4,7 @@ import 'package:country/constant/textfield_decoration.dart';
 import 'package:country/providers/show_buttons.dart';
 import 'package:country/ui/home/widgets/home_screen_buttons.dart';
 import 'package:country/ui/search_result/search_result_provider.dart';
+import 'package:country/ui/shared/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -111,16 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           } else
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => Container(
-                                height: 48,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 16),
-                                color: Colors.red,
-                                child: Text(
-                                  'Invalid Input',
-                                  style: kBodyTextStyle.copyWith(
-                                      color: Colors.white),
-                                ),
+                              builder: (context) => Bottomsheet(
+                                text: 'Invalid input',
+                                success: false,
                               ),
                               elevation: 4,
                               isDismissible: true,

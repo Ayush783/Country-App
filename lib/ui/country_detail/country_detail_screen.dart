@@ -1,14 +1,16 @@
+//@dart=2.9
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/providers/bookmark_provider.dart';
 import 'package:country/repository/save/shared_pref_service.dart';
+import 'package:country/ui/download/download_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDetailScreen extends ConsumerWidget {
-  final Country? country;
-  const CountryDetailScreen({Key? key, this.country}) : super(key: key);
+  final Country country;
+  const CountryDetailScreen({Key key, this.country}) : super(key: key);
 
   static SharedPrefService spService = SharedPrefService();
 
@@ -29,26 +31,26 @@ class CountryDetailScreen extends ConsumerWidget {
                   width: size.width,
                 ),
                 SvgPicture.network(
-                  country!.flag!,
+                  country.flag,
                   height: size.height * 0.15,
                 ),
                 Padding(padding: EdgeInsets.only(top: size.height * 0.03)),
                 Text(
-                  country!.name!,
-                  style: kheadingTextStyle!.copyWith(color: Color(0xff6C63FF)),
+                  country.name,
+                  style: kheadingTextStyle.copyWith(color: Color(0xff6C63FF)),
                 ),
                 Padding(padding: EdgeInsets.only(top: size.height * 0.01)),
                 Text(
-                  country!.region! + ' / ' + country!.subregion!,
+                  country.region + ' / ' + country.subregion,
                   style: kBodyTextStyle,
                 ),
                 Padding(padding: EdgeInsets.only(top: size.height * 0.01)),
                 Text(
-                  'latitude:  ' + country!.latlng![0].toString(),
+                  'latitude:  ' + country.latlng[0].toString(),
                   style: kBodyTextStyle,
                 ),
                 Text(
-                  'longitude:  ' + country!.latlng![1].toString(),
+                  'longitude:  ' + country.latlng[1].toString(),
                   style: kBodyTextStyle,
                 ),
                 Padding(padding: EdgeInsets.only(top: size.height * 0.02)),
@@ -57,23 +59,20 @@ class CountryDetailScreen extends ConsumerWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        context.read(bookMarkProvider).toggleBookmark(country!);
+                        context.read(bookMarkProvider).toggleBookmark(country);
                         spService.saveBookmarks(bookmarks.value);
                       },
                       icon: Icon(
                         Icons.bookmark,
                       ),
                       color: bookmarks.value
-                              .any((element) => element.name == country!.name)
+                              .any((element) => element.name == country.name)
                           ? Color(0xff6C63FF)
                           : Colors.grey,
                     ),
                     Padding(padding: EdgeInsets.only(right: 16)),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.download,
-                      ),
+                    DownloadProvider(
+                      country: country,
                     ),
                   ],
                 ),
@@ -104,9 +103,9 @@ class CountryDetailScreen extends ConsumerWidget {
                           ),
                           Spacer(),
                           Text(
-                            country!.capital!,
-                            style: kBodyTextStyle!
-                                .copyWith(color: Colors.blue[900]),
+                            country.capital,
+                            style: kBodyTextStyle.copyWith(
+                                color: Colors.blue[900]),
                           )
                         ],
                       ),
@@ -120,9 +119,9 @@ class CountryDetailScreen extends ConsumerWidget {
                           ),
                           Spacer(),
                           Text(
-                            country!.population!.toString(),
-                            style: kBodyTextStyle!
-                                .copyWith(color: Colors.blue[900]),
+                            country.population.toString(),
+                            style: kBodyTextStyle.copyWith(
+                                color: Colors.blue[900]),
                           )
                         ],
                       ),
@@ -136,9 +135,9 @@ class CountryDetailScreen extends ConsumerWidget {
                           ),
                           Spacer(),
                           Text(
-                            country!.area!.toString() + ' km²',
-                            style: kBodyTextStyle!
-                                .copyWith(color: Colors.blue[900]),
+                            country.area.toString() + ' km²',
+                            style: kBodyTextStyle.copyWith(
+                                color: Colors.blue[900]),
                           )
                         ],
                       ),
@@ -152,9 +151,9 @@ class CountryDetailScreen extends ConsumerWidget {
                           ),
                           Spacer(),
                           Text(
-                            country!.nativeName!,
-                            style: kBodyTextStyle!
-                                .copyWith(color: Colors.blue[900]),
+                            country.nativeName,
+                            style: kBodyTextStyle.copyWith(
+                                color: Colors.blue[900]),
                           )
                         ],
                       ),
@@ -168,9 +167,9 @@ class CountryDetailScreen extends ConsumerWidget {
                           ),
                           Spacer(),
                           Text(
-                            country!.alpha2Code! + ' / ' + country!.alpha3Code!,
-                            style: kBodyTextStyle!
-                                .copyWith(color: Colors.blue[900]),
+                            country.alpha2Code + ' / ' + country.alpha3Code,
+                            style: kBodyTextStyle.copyWith(
+                                color: Colors.blue[900]),
                           )
                         ],
                       ),
@@ -189,7 +188,7 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Calling Codes'),
                     children: [
-                      for (String code in country!.callingCodes!)
+                      for (String code in country.callingCodes)
                         Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
@@ -214,7 +213,7 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Border Countries'),
                     children: [
-                      for (String code in country!.borders!)
+                      for (String code in country.borders)
                         Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
@@ -240,7 +239,7 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Time zones'),
                     children: [
-                      for (String time in country!.timezones!)
+                      for (String time in country.timezones)
                         Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
@@ -265,7 +264,7 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Currencies'),
                     children: [
-                      for (Map currency in country!.currencies!)
+                      for (Map currency in country.currencies)
                         Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(
@@ -292,7 +291,7 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Languages'),
                     children: [
-                      for (Map language in country!.languages!)
+                      for (Map language in country.languages)
                         Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Text(

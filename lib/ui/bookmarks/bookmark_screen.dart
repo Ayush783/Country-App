@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:country/constant/text_styles.dart';
 import 'package:country/providers/bookmark_provider.dart';
 import 'package:country/ui/shared/country_card.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BookmarkScreen extends ConsumerWidget {
-  const BookmarkScreen({Key? key}) : super(key: key);
+  const BookmarkScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {

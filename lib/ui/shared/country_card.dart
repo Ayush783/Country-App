@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/providers/bookmark_provider.dart';
@@ -8,9 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryCard extends ConsumerWidget {
-  final Country? country;
+  final Country country;
   const CountryCard({
-    Key? key,
+    Key key,
     this.country,
   }) : super(key: key);
 
@@ -25,7 +26,7 @@ class CountryCard extends ConsumerWidget {
       margin: EdgeInsets.only(bottom: 16),
       child: ListTile(
         title: Text(
-          country!.name!,
+          country.name,
           style: kBodyTextStyle,
         ),
         dense: true,
@@ -33,21 +34,21 @@ class CountryCard extends ConsumerWidget {
           width: 64,
           child: Center(
             child: SvgPicture.network(
-              country!.flag!,
+              country.flag,
               height: 24,
             ),
           ),
         ),
-        subtitle: Text(country!.region!),
+        subtitle: Text(country.region),
         minLeadingWidth: 0,
         // isThreeLine: true,
         trailing: IconButton(
           onPressed: () {
-            context.read(bookMarkProvider).toggleBookmark(country!);
+            context.read(bookMarkProvider).toggleBookmark(country);
             spService.saveBookmarks(bookmarks.value);
           },
           icon: Icon(Icons.bookmark),
-          color: bookmarks.value.any((element) => element.name == country!.name)
+          color: bookmarks.value.any((element) => element.name == country.name)
               ? Color(0xff6C63FF)
               : Colors.grey,
         ),

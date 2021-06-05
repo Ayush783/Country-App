@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:country/providers/show_buttons.dart';
 import 'package:country/ui/bookmarks/bookmark_screen.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreenButtons extends ConsumerWidget {
   const HomeScreenButtons({
-    Key? key,
-    required this.size,
+    Key key,
+    @required this.size,
   }) : super(key: key);
 
   final Size size;

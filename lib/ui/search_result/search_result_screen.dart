@@ -1,12 +1,13 @@
+//@dart=2.9
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/ui/shared/country_card.dart';
 import 'package:flutter/material.dart';
 
 class SearchResultScreen extends StatelessWidget {
-  final String? query;
-  final List<Country>? countries;
-  const SearchResultScreen({Key? key, this.query, this.countries})
+  final String query;
+  final List<Country> countries;
+  const SearchResultScreen({Key key, this.query, this.countries})
       : super(key: key);
 
   @override
@@ -27,10 +28,10 @@ class SearchResultScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 child: ListView.builder(
-                  itemCount: countries!.length,
+                  itemCount: countries.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) => CountryCard(
-                    country: countries![index],
+                    country: countries[index],
                   ),
                 ),
               ),
