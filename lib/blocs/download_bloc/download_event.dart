@@ -6,6 +6,7 @@ abstract class DownloadEvent {}
 
 class Download extends DownloadEvent {
   final Country country;
+  final BuildContext context;
 
-  Download(this.country);
+  Download(this.country, this.context);
 }
