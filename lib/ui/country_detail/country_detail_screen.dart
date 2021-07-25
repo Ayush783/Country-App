@@ -1,4 +1,5 @@
 //@dart=2.9
+import 'package:country/constant/country_code_mapper.dart';
 import 'package:country/constant/text_styles.dart';
 import 'package:country/models/country/country.dart';
 import 'package:country/providers/bookmark_provider.dart';
@@ -27,9 +28,6 @@ class CountryDetailScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: size.width,
-                ),
                 SvgPicture.network(
                   country.flag,
                   height: size.height * 0.15,
@@ -81,6 +79,7 @@ class CountryDetailScreen extends ConsumerWidget {
                 Container(
                   width: size.width,
                   padding: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       color: Color(0xfff1f1f1),
                       borderRadius: BorderRadius.circular(8),
@@ -97,11 +96,12 @@ class CountryDetailScreen extends ConsumerWidget {
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                       Row(
                         children: [
-                          Text(
-                            'Capital City -  ',
-                            style: kBodyTextStyle,
+                          Expanded(
+                            child: Text(
+                              'Capital City -  ',
+                              style: kBodyTextStyle,
+                            ),
                           ),
-                          Spacer(),
                           Expanded(
                             child: Text(
                               country.capital,
@@ -115,19 +115,22 @@ class CountryDetailScreen extends ConsumerWidget {
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                       Row(
                         children: [
-                          Text(
-                            'Population -  ',
-                            style: kBodyTextStyle,
+                          Expanded(
+                            child: Text(
+                              'Population -  ',
+                              style: kBodyTextStyle,
+                            ),
                           ),
-                          Spacer(),
-                          Wrap(
-                            children: [
-                              Text(
-                                country.population.toString(),
-                                style: kBodyTextStyle.copyWith(
-                                    color: Colors.blue[900]),
-                              ),
-                            ],
+                          Expanded(
+                            child: Wrap(
+                              children: [
+                                Text(
+                                  country.population.toString(),
+                                  style: kBodyTextStyle.copyWith(
+                                      color: Colors.blue[900]),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -135,11 +138,12 @@ class CountryDetailScreen extends ConsumerWidget {
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                       Row(
                         children: [
-                          Text(
-                            'Area -  ',
-                            style: kBodyTextStyle,
+                          Expanded(
+                            child: Text(
+                              'Area -  ',
+                              style: kBodyTextStyle,
+                            ),
                           ),
-                          Spacer(),
                           Expanded(
                             child: Text(
                               country.area.toString() + ' km²',
@@ -153,11 +157,12 @@ class CountryDetailScreen extends ConsumerWidget {
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                       Row(
                         children: [
-                          Text(
-                            'Native name -  ',
-                            style: kBodyTextStyle,
+                          Expanded(
+                            child: Text(
+                              'Native name -  ',
+                              style: kBodyTextStyle,
+                            ),
                           ),
-                          Spacer(),
                           Expanded(
                             child: Container(
                               child: Text(
@@ -173,15 +178,18 @@ class CountryDetailScreen extends ConsumerWidget {
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                       Row(
                         children: [
-                          Text(
-                            'Country codes -',
-                            style: kBodyTextStyle,
+                          Expanded(
+                            child: Text(
+                              'Country codes -',
+                              style: kBodyTextStyle,
+                            ),
                           ),
-                          Spacer(),
-                          Text(
-                            country.alpha2Code + ' / ' + country.alpha3Code,
-                            style: kBodyTextStyle.copyWith(
-                                color: Colors.blue[900]),
+                          Expanded(
+                            child: Text(
+                              country.alpha2Code + ' / ' + country.alpha3Code,
+                              style: kBodyTextStyle.copyWith(
+                                  color: Colors.blue[900]),
+                            ),
                           )
                         ],
                       ),
@@ -200,14 +208,20 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Calling Codes'),
                     children: [
-                      for (String code in country.callingCodes)
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            '+' + code,
-                            style: kBodyTextStyle,
-                          ),
-                        ),
+                      Wrap(
+                        spacing: 24,
+                        children: [
+                          for (String code in country.callingCodes)
+                            Chip(
+                              labelPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 4),
+                              label: Text(
+                                '+' + code,
+                                style: kBodyTextStyle,
+                              ),
+                            ),
+                        ],
+                      ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                     ],
@@ -225,14 +239,20 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Border Countries'),
                     children: [
-                      for (String code in country.borders)
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            code,
-                            style: kBodyTextStyle,
-                          ),
-                        ),
+                      Wrap(
+                        spacing: 24,
+                        children: [
+                          for (String code in country.borders)
+                            Chip(
+                              labelPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 4),
+                              label: Text(
+                                countryFromCode[iso3Toiso2[code]],
+                                style: kBodyTextStyle,
+                              ),
+                            ),
+                        ],
+                      ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                     ],
@@ -251,14 +271,25 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Time zones'),
                     children: [
-                      for (String time in country.timezones)
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            time.toString(),
-                            style: kBodyTextStyle,
+                      Wrap(
+                        spacing: 24,
+                        children: [
+                          Wrap(
+                            spacing: 24,
+                            children: [
+                              for (String time in country.timezones)
+                                Chip(
+                                  labelPadding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 4),
+                                  label: Text(
+                                    time.toString(),
+                                    style: kBodyTextStyle,
+                                  ),
+                                ),
+                            ],
                           ),
-                        ),
+                        ],
+                      ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                     ],
@@ -276,16 +307,22 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Currencies'),
                     children: [
-                      for (Map currency in country.currencies)
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            currency['symbol'].toString() +
-                                '    ' +
-                                currency['name'],
-                            style: kBodyTextStyle,
-                          ),
-                        ),
+                      Wrap(
+                        spacing: 24,
+                        children: [
+                          for (Map currency in country.currencies)
+                            Chip(
+                              labelPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 4),
+                              label: Text(
+                                currency['symbol'].toString() +
+                                    '    ' +
+                                    currency['name'],
+                                style: kBodyTextStyle,
+                              ),
+                            ),
+                        ],
+                      ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                     ],
@@ -303,16 +340,22 @@ class CountryDetailScreen extends ConsumerWidget {
                   child: ExpansionTile(
                     title: Text('Languages'),
                     children: [
-                      for (Map language in country.languages)
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            language['name'].toString() +
-                                '  /  ' +
-                                language['nativeName'],
-                            style: kBodyTextStyle,
-                          ),
-                        ),
+                      Wrap(
+                        spacing: 24,
+                        children: [
+                          for (Map language in country.languages)
+                            Chip(
+                              labelPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 4),
+                              label: Text(
+                                language['name'].toString() +
+                                    '  /  ' +
+                                    language['nativeName'],
+                                style: kBodyTextStyle,
+                              ),
+                            ),
+                        ],
+                      ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                     ],

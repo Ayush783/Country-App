@@ -34,7 +34,7 @@ class CountryCard extends ConsumerWidget {
           width: 64,
           child: Center(
             child: SvgPicture.network(
-              country.flag,
+              country.flag ?? 'assets/icons/nof.svg',
               height: 24,
             ),
           ),
