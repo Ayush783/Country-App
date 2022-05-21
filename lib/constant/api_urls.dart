@@ -1,4 +1,4 @@
-const String apiBaseUrl = 'https://restcountries.eu/rest/v2/';
+const String apiBaseUrl = 'https://restcountries.com/v3.1/';
 
 const String searchByNameUrl = apiBaseUrl + 'name/';
 

@@ -155,25 +155,6 @@ class CountryDetailScreen extends ConsumerWidget {
                       ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Native name -  ',
-                              style: kBodyTextStyle,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              child: Text(
-                                country.nativeName,
-                                style: kBodyTextStyle.copyWith(
-                                    color: Colors.blue[900]),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
                       Padding(
                           padding: EdgeInsets.only(top: size.height * 0.01)),
                       Row(
@@ -186,7 +167,7 @@ class CountryDetailScreen extends ConsumerWidget {
                           ),
                           Expanded(
                             child: Text(
-                              country.alpha2Code + ' / ' + country.alpha3Code,
+                              country.cca2 + ' / ' + country.cca3,
                               style: kBodyTextStyle.copyWith(
                                   color: Colors.blue[900]),
                             ),
@@ -198,35 +179,35 @@ class CountryDetailScreen extends ConsumerWidget {
                 ),
                 Padding(padding: EdgeInsets.only(top: size.height * 0.03)),
                 //calling codes
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xfff1f1f1),
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(offset: Offset(1, 1), color: Colors.grey)
-                      ]),
-                  child: ExpansionTile(
-                    title: Text('Calling Codes'),
-                    children: [
-                      Wrap(
-                        spacing: 24,
-                        children: [
-                          for (String code in country.callingCodes)
-                            Chip(
-                              labelPadding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 4),
-                              label: Text(
-                                '+' + code,
-                                style: kBodyTextStyle,
-                              ),
-                            ),
-                        ],
-                      ),
-                      Padding(
-                          padding: EdgeInsets.only(top: size.height * 0.01)),
-                    ],
-                  ),
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //       color: Color(0xfff1f1f1),
+                //       borderRadius: BorderRadius.circular(8),
+                //       boxShadow: [
+                //         BoxShadow(offset: Offset(1, 1), color: Colors.grey)
+                //       ]),
+                //   child: ExpansionTile(
+                //     title: Text('Calling Codes'),
+                //     children: [
+                //       Wrap(
+                //         spacing: 24,
+                //         children: [
+                //           for (String code in country.callingCodes)
+                //             Chip(
+                //               labelPadding: EdgeInsets.symmetric(
+                //                   horizontal: 16, vertical: 4),
+                //               label: Text(
+                //                 '+' + code,
+                //                 style: kBodyTextStyle,
+                //               ),
+                //             ),
+                //         ],
+                //       ),
+                //       Padding(
+                //           padding: EdgeInsets.only(top: size.height * 0.01)),
+                //     ],
+                //   ),
+                // ),
                 Padding(padding: EdgeInsets.only(top: size.height * 0.03)),
                 //calling codes
                 Container(
@@ -343,14 +324,12 @@ class CountryDetailScreen extends ConsumerWidget {
                       Wrap(
                         spacing: 24,
                         children: [
-                          for (Map language in country.languages)
+                          for (String name in country.languages)
                             Chip(
                               labelPadding: EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 4),
                               label: Text(
-                                language['name'].toString() +
-                                    '  /  ' +
-                                    language['nativeName'],
+                                name,
                                 style: kBodyTextStyle,
                               ),
                             ),

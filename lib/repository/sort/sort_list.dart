@@ -12,9 +12,9 @@ class SortCountries {
   }
 
   void sortByCode(List<Country> countries, BuildContext context) {
-    print(countries[0].alpha2Code);
-    countries.sort((a, b) => a.alpha2Code!.compareTo(b.alpha2Code!));
-    print(countries[0].alpha2Code);
+    print(countries[0].cca2);
+    countries.sort((a, b) => a.cca2!.compareTo(b.cca2!));
+    print(countries[0].cca2);
     context.read(searchResultListProvider).getList(countries);
   }
 

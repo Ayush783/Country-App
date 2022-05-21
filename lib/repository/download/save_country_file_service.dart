@@ -5,8 +5,7 @@ import 'package:country/models/country/country.dart';
 import 'package:country/models/failures/download_failure.dart';
 import 'package:country/providers/downloaded_files_provider.dart';
 import 'package:dartz/dartz.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
-import 'package:flutter/foundation.dart';
+import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -49,5 +48,5 @@ class SaveFileService {
 }
 
 String str(Country c) {
-  return 'Country: ${c.name}\nCapital: ${c.capital}\nRegion: ${c.region}\nSub-region: ${c.subregion}\nLatitude: ${c.latlng[0]}\nLongitude: ${c.latlng[1]}\nPopulation: ${c.population}\nArea: ${c.area}\nNative name: ${c.nativeName}\nCountry codes: ${c.alpha2Code + '/' + c.alpha3Code}\nCalling codes: ${c.callingCodes.join('/')}\nBorder countries: ${c.borders.join('/')}\nTime-zones: ${c.timezones.join(' / ')}\nCurrencies: ${List.from(c.currencies.map((e) => e['symbol'] + ' ' + e['name'])).join(' / ')}';
+  return 'Country: ${c.name}\nCapital: ${c.capital}\nRegion: ${c.region}\nSub-region: ${c.subregion}\nLatitude: ${c.latlng[0]}\nLongitude: ${c.latlng[1]}\nPopulation: ${c.population}\nArea: ${c.area}\nCountry codes: ${c.cca2 + '/' + c.cca3}\nCalling codes: ${c.callingCodes.join('/')}\nBorder countries: ${c.borders.join('/')}\nTime-zones: ${c.timezones.join(' / ')}\nCurrencies: ${List.from(c.currencies.map((e) => e['symbol'] + ' ' + e['name'])).join(' / ')}';
 }

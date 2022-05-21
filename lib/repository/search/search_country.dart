@@ -1,5 +1,7 @@
 //@dart=2.9
 
+import 'dart:developer';
+
 import 'package:country/constant/api_urls.dart';
 import 'package:country/constant/langToCode.dart';
 import 'package:country/models/country/country.dart';
@@ -86,6 +88,7 @@ class SearchService {
       final response = await _dio.get(
         searchByRegionUrl + '$region',
       );
+      log(response.statusMessage);
       final List<Map<String, dynamic>> data = List.from(response.data);
       final countries = data.map((e) => Country.fromJson(e)).toList();
       return right(countries);
